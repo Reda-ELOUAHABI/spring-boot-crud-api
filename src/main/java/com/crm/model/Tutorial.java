@@ -14,20 +14,18 @@ public class Tutorial {
 	@Column(name = "title")
 	private String title;
 
-	@Column(name = "description")
-	private String description;
+	@Column(name = "prix")
+	private long prix;
 
-	@Column(name = "published")
-	private boolean published;
 
 	public Tutorial() {
 
 	}
 
-	public Tutorial(String title, String description, boolean published) {
+	public Tutorial(String title, long prix
+			) {
 		this.title = title;
-		this.description = description;
-		this.published = published;
+		this.prix = prix;
 	}
 
 	public long getId() {
@@ -42,24 +40,17 @@ public class Tutorial {
 		this.title = title;
 	}
 
-	public String getDescription() {
-		return description;
+	public long getprix() {
+		return prix;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setprix(long prix) {
+		this.prix = prix;
 	}
 
-	public boolean isPublished() {
-		return published;
-	}
-
-	public void setPublished(boolean isPublished) {
-		this.published = isPublished;
-	}
 
 	@Override
 	public String toString() {
-		return "Tutorial [id=" + id + ", title=" + title + ", desc=" + description + ", published=" + published + "]";
+		return "Tutorial [id=" + id + ", title=" + title + ", prix=" + prix + "]";
 	}
 }

@@ -68,7 +68,7 @@ public class TutorialController {
   public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
     try {
       Tutorial _tutorial = tutorialRepository
-          .save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), false));
+          .save(new Tutorial(tutorial.getTitle(), tutorial.getprix()));
       return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -82,8 +82,7 @@ public class TutorialController {
     if (tutorialData.isPresent()) {
       Tutorial _tutorial = tutorialData.get();
       _tutorial.setTitle(tutorial.getTitle());
-      _tutorial.setDescription(tutorial.getDescription());
-      _tutorial.setPublished(tutorial.isPublished());
+      _tutorial.setprix(tutorial.getprix());
       return new ResponseEntity<>(tutorialRepository.save(_tutorial), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -111,18 +110,5 @@ public class TutorialController {
 
   }
 
-  @GetMapping("/tutorials/published")
-  public ResponseEntity<List<Tutorial>> findByPublished() {
-    try {
-      List<Tutorial> tutorials = tutorialRepository.findByPublished(true);
-
-      if (tutorials.isEmpty()) {
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-      }
-      return new ResponseEntity<>(tutorials, HttpStatus.OK);
-    } catch (Exception e) {
-      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-  }
 
 }
